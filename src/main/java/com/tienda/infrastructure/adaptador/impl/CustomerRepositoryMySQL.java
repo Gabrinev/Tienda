@@ -1,43 +1,38 @@
 package com.tienda.infrastructure.adaptador.impl;
 
-import com.tienda.domain.model.Customer;
 import com.tienda.domain.port.CustomerRepository;
 import com.tienda.infrastructure.adaptador.CustomerCrudRepositoryMySQL;
-import com.tienda.infrastructure.rest.mapper.CustomerMapper;
+import com.tienda.infrastructure.entity.CustomerEntity;
 import org.springframework.stereotype.Repository;
 
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Repository
 public class CustomerRepositoryMySQL implements CustomerRepository {
 
     private final CustomerCrudRepositoryMySQL customerRepo;
 
-    private final CustomerMapper customerMapper;
-
-    public CustomerRepositoryMySQL(CustomerCrudRepositoryMySQL customerRepo, CustomerMapper customerMapper) {
+    public CustomerRepositoryMySQL(CustomerCrudRepositoryMySQL customerRepo) {
         this.customerRepo = customerRepo;
-        this.customerMapper = customerMapper;
     }
 
     @Override
-    public Iterable<Customer> getAllCustomers() {
-        return this.customerMapper.toDTO(this.customerRepo.findAll());
+    public Iterable<CustomerEntity> findAll() {
+        return this.customerRepo.findAll();
     }
 
     @Override
-    public Customer getCustomer(Long id) {
-        return this.customerMapper.toDTO(this.customerRepo.findById(id).orElseThrow(NoSuchElementException::new));
+    public Optional<CustomerEntity> findById(Long id) {
+        return this.customerRepo.findById(id);
     }
 
     @Override
-    public Customer saveCustomer(Customer customer) {
-        return this.customerMapper.toDTO(this.customerRepo.save(this.customerMapper.toEntity(customer)));
+    public CustomerEntity save(CustomerEntity customer) {
+        return this.customerRepo.save(customer);
     }
 
     @Override
-    public void deleteCustomerById(Long id) {
-        this.customerRepo.findById(id).orElseThrow(NoSuchElementException::new);
+    public void deleteById(Long id) {
         this.customerRepo.deleteById(id);
     }
 }

@@ -9,6 +9,18 @@ public class Customer {
     private String phoneNumber;
     private String address;
 
+    public Customer() {
+    }
+
+    public Customer(Long id, String name, String surname, String email, String phoneNumber, String address) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+
     public Long getId() {
         return id;
     }

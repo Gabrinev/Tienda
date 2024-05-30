@@ -13,6 +13,21 @@ public class Product {
     private byte[] picture;
 
 
+    public Product() {
+    }
+
+    public Product(Long id, String name, String description, String category, Double price, String size, String color, Integer stock, byte[] picture) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.size = size;
+        this.color = color;
+        this.stock = stock;
+        this.picture = picture;
+    }
+
     public Long getId() {
         return id;
     }

@@ -19,6 +19,20 @@ public class ProductEntity {
     @Lob
     private byte[] picture;
 
+    public ProductEntity() {
+    }
+
+    public ProductEntity(Long id, String name, String description, String category, Double price, String size, String color, Integer stock, byte[] picture) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.size = size;
+        this.color = color;
+        this.stock = stock;
+        this.picture = picture;
+    }
 
     public Long getId() {
         return id;

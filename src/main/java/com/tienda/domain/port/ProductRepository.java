@@ -1,12 +1,12 @@
 package com.tienda.domain.port;
 
-import com.tienda.domain.model.Product;
+import com.tienda.infrastructure.entity.ProductEntity;
 
 import java.util.Optional;
 
 public interface ProductRepository {
-    Iterable<Product> getProducts();
-    Product getProduct (Long id);
-    Product saveProduct (Product product);
-    void deleteProductById(Long id);
+    Iterable<ProductEntity> findAll();
+    Optional<ProductEntity> findById(Long id);
+    ProductEntity save(ProductEntity product);
+    void deleteById(Long id);
 }

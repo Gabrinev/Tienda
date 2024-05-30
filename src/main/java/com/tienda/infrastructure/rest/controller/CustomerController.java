@@ -2,6 +2,7 @@ package com.tienda.infrastructure.rest.controller;
 
 import com.tienda.application.service.ICustomerService;
 import com.tienda.domain.model.Customer;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer){
+        // TODO: RETURN 200 when update
         return new ResponseEntity<>(customerService.saveCustomer(customer), HttpStatus.CREATED);
     }
 

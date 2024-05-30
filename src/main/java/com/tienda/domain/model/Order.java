@@ -1,14 +1,33 @@
 package com.tienda.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.validation.annotation.Validated;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Order {
 
     private Long id;
-    private Date date;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime date;
     private String status;
     private Double total;
-    private Long clientId;
+
+    @NotNull(message = "Cannot create an Order without Customer")
+    private Customer customer;
+
+    public Order() {
+    }
+
+    public Order(Long id, LocalDateTime date, String status, Double total, Customer customer) {
+        this.id = id;
+        this.date = date;
+        this.status = status;
+        this.total = total;
+        this.customer = customer;
+    }
 
     public Long getId() {
         return id;
@@ -18,11 +37,11 @@ public class Order {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -42,11 +61,11 @@ public class Order {
         this.total = total;
     }
 
-    public Long getClientId() {
-        return clientId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

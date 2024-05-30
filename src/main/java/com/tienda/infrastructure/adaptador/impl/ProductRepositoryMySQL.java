@@ -1,40 +1,39 @@
 package com.tienda.infrastructure.adaptador.impl;
 
-import com.tienda.domain.model.Product;
 import com.tienda.domain.port.ProductRepository;
 import com.tienda.infrastructure.adaptador.ProductCrudRepositoryMySQL;
-import com.tienda.infrastructure.rest.mapper.ProductMapper;
+import com.tienda.infrastructure.entity.ProductEntity;
+import com.tienda.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public class ProductRepositoryMySQL implements ProductRepository {
 
     private final ProductCrudRepositoryMySQL productRepo;
-
-    private final ProductMapper productMapper;
-
-    public ProductRepositoryMySQL(ProductCrudRepositoryMySQL productRepo, ProductMapper productMapper) {
+    
+    public ProductRepositoryMySQL(ProductCrudRepositoryMySQL productRepo) {
         this.productRepo = productRepo;
-        this.productMapper = productMapper;
     }
 
     @Override
-    public Iterable<Product> getProducts() {
-        return null;
+    public Iterable<ProductEntity> findAll() {
+        return this.productRepo.findAll();
     }
 
     @Override
-    public Product getProduct(Long id) {
-        return null;
+    public Optional<ProductEntity> findById(Long id) {
+        return this.productRepo.findById(id);
     }
 
     @Override
-    public Product saveProduct(Product product) {
-        return null;
+    public ProductEntity save(ProductEntity product) {
+        return this.productRepo.save(product);
     }
 
     @Override
-    public void deleteProductById(Long id) {
-
+    public void deleteById(Long id) {
+        this.productRepo.deleteById(id);
     }
 }

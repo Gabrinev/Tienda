@@ -3,7 +3,6 @@ package com.tienda.infrastructure.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "`order`")
@@ -14,10 +13,20 @@ public class OrderEntity {
     private LocalDateTime date;
     private String status;
     private Double total;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private CustomerEntity customerId;
+    private CustomerEntity customer;
+
+    public OrderEntity() {
+    }
+
+    public OrderEntity(Long id, LocalDateTime date, String status, Double total, CustomerEntity customer) {
+        this.id = id;
+        this.date = date;
+        this.status = status;
+        this.total = total;
+        this.customer = customer;
+    }
 
     public Long getId() {
         return id;
@@ -51,11 +60,11 @@ public class OrderEntity {
         this.total = total;
     }
 
-    public CustomerEntity getCustomerId() {
-        return customerId;
+    public CustomerEntity getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(CustomerEntity customerId) {
-        this.customerId = customerId;
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
     }
 }

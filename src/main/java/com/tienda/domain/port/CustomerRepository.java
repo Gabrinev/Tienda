@@ -1,12 +1,12 @@
 package com.tienda.domain.port;
 
-import com.tienda.domain.model.Customer;
+import com.tienda.infrastructure.entity.CustomerEntity;
 
 import java.util.Optional;
 
 public interface CustomerRepository {
-    Iterable<Customer> getAllCustomers();
-    Customer getCustomer(Long id);
-    Customer saveCustomer(Customer product);
-    void deleteCustomerById(Long id);
+    Iterable<CustomerEntity> findAll();
+    Optional<CustomerEntity> findById(Long id);
+    CustomerEntity save(CustomerEntity customer);
+    void deleteById(Long id);
 }

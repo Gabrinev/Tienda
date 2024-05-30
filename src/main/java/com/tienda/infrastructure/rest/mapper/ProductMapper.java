@@ -1,7 +1,12 @@
 package com.tienda.infrastructure.rest.mapper;
 
+import com.tienda.domain.model.Customer;
 import com.tienda.domain.model.Product;
+import com.tienda.infrastructure.entity.CustomerEntity;
 import com.tienda.infrastructure.entity.ProductEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductMapper {
 
@@ -19,6 +24,15 @@ public class ProductMapper {
         return product;
     }
 
+    public Iterable<Product> toDTO(Iterable<ProductEntity> entities) {
+        List<Product> dtoList = new ArrayList<>();
+        for (ProductEntity entity : entities) {
+            Product dto = this.toDTO(entity);
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
+
     public ProductEntity toEntity(Product product) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setId(product.getId());
@@ -32,4 +46,15 @@ public class ProductMapper {
         productEntity.setPicture(product.getPicture());
         return productEntity;
     }
+
+    public Iterable<ProductEntity> toEntity(Iterable<Product> dtos) {
+        List<ProductEntity> entityList = new ArrayList<>();
+        for (Product dto : dtos) {
+            ProductEntity entity = this.toEntity(dto);
+            entityList.add(entity);
+        }
+        return entityList;
+    }
+
+
 }
